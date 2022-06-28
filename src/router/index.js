@@ -1,54 +1,58 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Signup from '../views/Signup.vue'
-import News from '../views/News.vue'
-import Login from '../views/Login.vue'
-import OneNews from '../views/OneNews.vue'
-import CreateNews from '../views/CreateNews.vue'
-import AuthGuard from './auth-guard'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "../views/Home.vue";
+import Signup from "../views/Signup.vue";
+import Login from "../views/Login.vue";
+import FindAnimals from "../views/FindAnimals.vue";
+import Dog from "../views/Dog.vue";
+import Cat from "../views/Cat.vue";
+import Bird from "../views/Bird.vue";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "Home",
+    component: Home,
   },
   {
-    path: '/news',
-    name: 'News',
-    component: News
+    path: "/findanimals",
+    name: "FindAnimals",
+    component: FindAnimals,
+  },
+
+  {
+    path: "/signup",
+    name: "Signup",
+    component: Signup,
   },
   {
-    path: '/news/:id',
-    name: 'OneNews',
-    props: true,
-    component: OneNews
+    path: "/login",
+    name: "Login",
+    component: Login,
   },
   {
-    path: '/signup',
-    name: 'Signup',
-    component: Signup
+    path: "/dog",
+    name: "Dog",
+    component: Dog,
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: Login
+    path: "/cat",
+    name: "Cat",
+    component: Cat,
   },
   {
-    path: '/new-news',
-    name: 'CreateNews',
-    component: CreateNews,
-    beforeEnter: AuthGuard
-  }
-]
+    path: "/bird",
+    name: "Bird",
+    component: Bird,
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

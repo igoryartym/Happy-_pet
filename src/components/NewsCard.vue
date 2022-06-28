@@ -1,34 +1,25 @@
 <template>
-  <v-card class="mx-auto my-12" max-width="374">
-    <v-img height="240" :src="event.imageUrl"></v-img>
-    <v-card-title class="justify-center">{{ event.title }}</v-card-title>
-    <v-card-text>
-      <v-row align="center" class="mx-0"> </v-row>
-      <div class="my-4 text-subtitle-1">{{ event.location }}</div>
-      <div>{{ event.date }}</div>
+  <div class="wrapper">
+    <div class="card">
+      <div class="front">
+        <img :src="require(`@/assets/cards/${pet.img}`)" alt="" />
+      </div>
 
-    </v-card-text>
-    <v-divider class="mx-4"></v-divider>
-    <v-card-text>
-      <v-list dense>
-        <v-list-item-group color="primary">
-          <v-chip v-for="topic in event.topics" :key="topic" class="ma-2">
-            {{ topic }}
-          </v-chip>
-        </v-list-item-group>
-      </v-list>
-    </v-card-text>
+      <div class="back">
+        <p>{{ pet.title_cont }}</p>
+      </div>
+    </div>
 
-    <v-card-actions>
-      <v-btn color="deep-indigo lighten-2" text :to="'/news/' + event.id">> Details </v-btn>
-    </v-card-actions>
-  </v-card>
+    <div class="title">
+      <p>{{ pet.title }}</p>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   name: "NewsCard",
-  props: ["event"],
+  props: ["pet"],
 
   data() {
     return {};
@@ -36,6 +27,64 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+.wrapper {
+  background-color: white;
+  padding: 10px;
+  margin: 60px 30px;
+  outline: 1px solid grey;
+  border-radius: 10px;
+  min-width: 200px;
+  text-align: center;
+  height: fit-content;
+}
 
+.title p {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px;
+}
+.card {
+  cursor: pointer;
+  width: 200px;
+  height: 220px;
+  position: relative;
+}
+.front,
+.back {
+  overflow: hidden;
+  backface-visibility: hidden;
+  position: absolute;
+  transition: 0.5s linear;
+}
+.front img {
+  width: 100%;
+  height: 220px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+.front {
+  transform: perspective(600px) rotateY(0deg);
+}
+.back {
+  width: 100%;
+  height: 100%;
+  background-color: #ecdc98;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  transform: perspective(600px) rotateY(180deg);
+}
+.back p {
+  color: white;
+  font-size: 20px;
+  padding: 10px;
+}
+.card:hover > .front {
+  transform: perspective(600px) rotateY(-180deg);
+}
+.card:hover > .back {
+  transform: perspective(600px) rotateY(0deg);
+}
 </style>

@@ -1,68 +1,70 @@
 <template>
-  <v-app>
+  <v-app class="signup_container">
     <Navbar />
-    <v-card class="form-container" elevation="5">
-      <p class="form-title indigo--text font-weight-bold">Sign Up</p>
-      <Alert
-        class="alert"
-        @dismissed="onDismissed"
-        v-if="error"
-        :text="error.message"
-      />
-      <form class="form" @submit.prevent="onSignup">
-        <v-text-field
-          v-model="email"
-          :error-messages="emailErrors"
-          label="*E-mail"
-          required
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
-        >
-        </v-text-field>
+    <div class="section-singup">
+      <v-card class="form-container" elevation="5">
+        <p class="form-title indigo--text font-weight-bold">Sign Up</p>
+        <Alert
+          class="alert"
+          @dismissed="onDismissed"
+          v-if="error"
+          :text="error.message"
+        />
+        <form class="form" @submit.prevent="onSignup">
+          <v-text-field
+            v-model="email"
+            :error-messages="emailErrors"
+            label="*E-mail"
+            required
+            @input="$v.email.$touch()"
+            @blur="$v.email.$touch()"
+          >
+          </v-text-field>
 
-        <v-text-field
-          v-model="password"
-          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-          :rules="[rules.required, rules.min]"
-          :type="show1 ? 'text' : 'password'"
-          name="input-10-1"
-          label="*Password"
-          hint="At least 8 characters"
-          counter
-          @click:append="show1 = !show1"
-        ></v-text-field>
-        <v-text-field
-          v-model="confirmedPassword"
-          :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-          :rules="[rules.comparePasswords]"
-          :type="show2 ? 'text' : 'password'"
-          name="input-10-1"
-          label="*Confirm Password"
-          hint="At least 8 characters"
-          counter
-          @click:append="show2 = !show2"
-        ></v-text-field>
-        <v-btn
-          class="my-2"
-          type="submit"
-          elevation="2"
-          dark
-          rounded
-          medium
-          color="indigo"
-          :disabled="loading"
-          :loading="loading4"
-          @click="loader = 'loading4'"
-        >
-          Sign Up
-          <template v-slot:loader>
-            <span class="custom-loader">
-              <v-icon light>mdi-cached</v-icon>
-            </span>
-          </template>
-        </v-btn>
-      </form>
-    </v-card>
+          <v-text-field
+            v-model="password"
+            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            :rules="[rules.required, rules.min]"
+            :type="show1 ? 'text' : 'password'"
+            name="input-10-1"
+            label="*Password"
+            hint="At least 8 characters"
+            counter
+            @click:append="show1 = !show1"
+          ></v-text-field>
+          <v-text-field
+            v-model="confirmedPassword"
+            :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+            :rules="[rules.comparePasswords]"
+            :type="show2 ? 'text' : 'password'"
+            name="input-10-1"
+            label="*Confirm Password"
+            hint="At least 8 characters"
+            counter
+            @click:append="show2 = !show2"
+          ></v-text-field>
+          <v-btn
+            class="my-2"
+            type="submit"
+            elevation="2"
+            dark
+            rounded
+            medium
+            color="indigo"
+            :disabled="loading"
+            :loading="loading4"
+            @click="loader = 'loading4'"
+          >
+            Sign Up
+            <template v-slot:loader>
+              <span class="custom-loader">
+                <v-icon light>mdi-cached</v-icon>
+              </span>
+            </template>
+          </v-btn>
+        </form>
+      </v-card>
+    </div>
     <Footer />
   </v-app>
 </template>
@@ -70,7 +72,7 @@
 <script>
 import Navbar from "../components/Navbar";
 import Alert from "../components/Alert";
-
+import Footer from "@/components/Footer";
 import { validationMixin } from "vuelidate";
 import { required, email } from "vuelidate/lib/validators";
 
@@ -79,6 +81,7 @@ export default {
   components: {
     Navbar,
     Alert,
+    Footer,
   },
   mixins: [validationMixin],
 
@@ -153,6 +156,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.signup_container {
+  background-color: #ecdc98;
+}
+.section-singup {
+  min-height: 100vh;
+}
 .form-container {
   width: 70%;
   margin: 5% auto;
@@ -195,11 +204,6 @@ export default {
     to {
       transform: rotate(360deg);
     }
-  }
-}
-@media (max-width: 768px) {
-  .form-container {
-    width: 95%;
   }
 }
 </style>
